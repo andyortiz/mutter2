@@ -1,15 +1,12 @@
 // react
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // third-party
-import { FormattedMessage } from 'react-intl';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 // application
-import Decor from '~/components/shared/Decor';
-import url from '~/services/url';
-import VehicleSelect from '~/components/shared/VehicleSelect';
-import { baseUrl } from '~/services/utils';
-import { hrefToRouterArgs } from '~/services/router';
-import { IVehicle } from '~/interfaces/vehicle';
+import Decor from "~/components/shared/Decor";
+import url from "~/services/url";
+import { hrefToRouterArgs } from "~/services/router";
+import { IVehicle } from "~/interfaces/vehicle";
 
 function BlockFinder() {
     const router = useRouter();
@@ -22,37 +19,33 @@ function BlockFinder() {
             return;
         }
 
-        router.push(
-            ...hrefToRouterArgs(url.products({
-                filters: {
-                    filter_vehicle: vehicle.id.toString(),
-                },
-            })),
-        ).then();
+        router
+            .push(
+                ...hrefToRouterArgs(
+                    url.products({
+                        filters: {
+                            filter_vehicle: vehicle.id.toString(),
+                        },
+                    })
+                )
+            )
+            .then();
     };
 
     return (
-        <div className="block block-finder">
+        <div
+            className="block block-finder"
+            style={{ display: "flex", justifyContent: "center", backgroundColor: "white" }}
+        >
             <Decor className="block-finder__decor" type="bottom" />
             <div
-                className="block-finder__image"
-                style={{ backgroundImage: `url(${baseUrl('/images/finder.jpg')})` }}
-            />
-            <div className="block-finder__body container container--max--xl">
-                <div className="block-finder__title">
-                    <FormattedMessage id="TEXT_BLOCK_FINDER_TITLE" />
-                </div>
-                <div className="block-finder__subtitle">
-                    <FormattedMessage id="TEXT_BLOCK_FINDER_SUBTITLE" />
-                </div>
-                <form className="block-finder__form" onSubmit={onSubmit}>
-                    <VehicleSelect className="block-finder__select" onVehicleChange={setVehicle} />
-
-                    <button className="block-finder__button" type="submit">
-                        <FormattedMessage id="BUTTON_BLOCK_FINDER_SEARCH" />
-                    </button>
-                </form>
-            </div>
+                id="parts-catalog"
+                data-key="TWS-B37A42C3-9F07-4BFF-BCB7-05D6F1A2C473"
+                data-back-url="/catalog/products?article?[article]&brand=[brand]"
+                data-language="es"
+                data-color-schema="red"
+            ></div>
+            <script type="text/javascript" src="https://gui.parts-catalogs.com/v2/parts-catalogs.js"></script>
         </div>
     );
 }
